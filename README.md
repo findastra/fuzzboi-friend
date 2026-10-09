@@ -26,8 +26,7 @@ The Fuzzbois themselves, their rules and the art live in [findastra/fuzzbois](ht
 
 What is not done, plainly:
 
-- **Letters A–F use a temporary rule.** No trait uses letters yet, so A–F count as 0–5 (A=0 … F=5). The background is still your exact color. When Astra decides what letters mean, your Fuzzboi may change. The rule lives in `fuzzbois/site/fuzzboi.js`, so both pages change together.
-- **Two other rules are undecided** (how a rarity is picked, and taco vs. cheese numbering). See the Fuzzbois README.
+- **Letters A–F aren't on Astra's design notes yet.** The notes ([Fuzzbois-33.png](https://github.com/findastra/fuzzbois/blob/main/art/procreate-export/Fuzzbois-33.png)) set every other rule. Until letters get traits, they count as 0–5 (A=0 … F=5), a stopgap chosen by Claude, not Astra. Your color is always exact; the traits may change later. The rules live in `fuzzbois/site/fuzzboi.js`, so both pages change together.
 - **The pet's art is a draft** until Astra approves it: nine moods generated on 2026-10-09 from a reference made from her own layers ([art/](art/), listed in `sprite-20261009.json`).
 - **Not in the Cage yet.** The registration (with the generated sheet, so it needn't be paid for again) is a patch in [cage/](cage/README.md), kept out of `astras-pet-apps` for now at Astra's request.
 - No desktop pet and no quick chat.
