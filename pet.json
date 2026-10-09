@@ -1,0 +1,12 @@
+{
+  "pet": "Fuzzboi Friend",
+  "kind": "pet-app",
+  "owner": "Astra",
+  "sprite": "sprite-20261009.json",
+  "job": "Makes your own Fuzzboi: type a six-digit hex code and get that exact Fuzzboi, drawn from Astra's layers, as a PNG.",
+  "runs_on": "A modern browser, online: https://findastra.github.io/fuzzboi-friend/",
+  "entry": "fuzzboi-friend-20261009.html",
+  "status": "hatching",
+  "cage": { "topic": "pet-app", "home": "README.md" },
+  "built_with": "Claude Opus 5.5 (claude-opus-5-5), 2026-10-09"
+}

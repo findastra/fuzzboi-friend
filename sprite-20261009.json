@@ -1,0 +1,8 @@
+{
+  "pet": "Fuzzboi Friend",
+  "art": "fuzzboi-friend",
+  "status": "waiting for art",
+  "note": "No mood frames yet. The pet well shows a Fuzzboi built from the fuzzbois layers (code 725001) as a stand-in. The Cage makes the mood sheet once Astra OKs it (findastra/astras-pet-apps, handoffs/006). Then copy the nine 256x256 frames into art/ and list them here.",
+  "moods": ["idle", "blink", "happy", "curious", "worried", "sad", "sick", "alarmed", "sleep"],
+  "frames": {}
+}

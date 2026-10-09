@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Fuzzboi Friend, a pet app by Astra: type your six-digit hex code and get your own Fuzzboi.">
+<title>Fuzzboi Friend</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chewy&family=Gaegu:wght@400;700&family=Nunito:wght@400;600;800&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+/* Fuzzboi Friend: one job, one screen. The Forge's navy page and lime band, the pet well top left,
+   one code box, one big picture. Single committed dark look, like the Forge. */
+:root{
+  --ground:#0d1a6e; --panel:#0a1456; --ink:#eef0ff; --muted:#a9b2ea;
+  --lime:#bbff69; --lime-ink:#0d1a6e; --chalk:#ffe95c; --pink:#f20ac8;
+  --ok:#5fe08a; --warn:#ffb340; --bad:#ff6b6b; --line:rgba(169,178,234,.22);
+  --f-display:"Chewy","Comic Sans MS",system-ui,sans-serif;
+  --f-hand:"Gaegu","Comic Sans MS",cursive;
+  --f-body:"Nunito",system-ui,-apple-system,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.5;
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:44px 44px;background-position:-1px -1px}
+a{color:var(--chalk)}
+.band{background:var(--lime);color:var(--lime-ink);border-bottom:4px solid var(--lime-ink)}
+.band-inner{max-width:1040px;margin:0 auto;padding:18px 16px;display:flex;align-items:center;gap:16px}
+h1{font-family:var(--f-display);font-weight:400;font-size:clamp(38px,8vw,64px);line-height:.9;margin:0;transform:rotate(-2deg);text-shadow:3px 3px 0 var(--pink)}
+.band p{font-family:var(--f-hand);font-size:21px;margin:4px 0 0;max-width:36ch}
+/* the pet well: square, the pet's home inside its app */
+.well{flex:none;width:96px;height:96px;border-radius:18px;border:3px solid var(--lime-ink);background:var(--panel);display:grid;place-items:center;position:relative;overflow:visible}
+.well canvas{width:84px;height:84px;border-radius:12px;image-rendering:auto}
+.well .mood{position:absolute;bottom:-11px;left:50%;transform:translateX(-50%);font-family:var(--f-mono);font-size:11px;background:var(--lime-ink);color:var(--lime);padding:1px 8px;border-radius:999px;white-space:nowrap}
+.bubble{position:relative;background:#fff;color:#141a4a;font-family:var(--f-hand);font-weight:700;font-size:20px;line-height:1.15;padding:8px 14px;border-radius:16px;border:3px solid var(--lime-ink);max-width:28ch}
+.bubble::before{content:"";position:absolute;left:-11px;top:50%;margin-top:-8px;border:8px solid transparent;border-right-color:var(--lime-ink);border-left:0}
+.head{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.wrap{max-width:1040px;margin:0 auto;padding:24px 16px 56px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:24px;align-items:start}
+@media (max-width:820px){.wrap{grid-template-columns:minmax(0,1fr)}}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:18px;padding:22px;display:grid;gap:16px;min-width:0}
+label.big{font-family:var(--f-display);font-size:30px;color:var(--chalk);line-height:1}
+.code{display:flex;align-items:center;gap:10px}
+.code span{font-family:var(--f-display);font-size:44px;color:var(--chalk);line-height:1}
+#code{flex:1;min-width:0;width:100%;font-family:var(--f-mono);font-weight:600;font-size:clamp(28px,7vw,40px);letter-spacing:.18em;text-transform:uppercase;padding:10px 14px;border-radius:14px;border:2px solid var(--line);background:var(--ground);color:var(--ink);caret-color:var(--chalk)}
+#code:focus{outline:none;border-color:var(--chalk)}
+#code.err{border-color:var(--bad)}
+.chip{width:46px;height:46px;flex:none;border-radius:12px;border:2px solid var(--line);background:var(--ground)}
+.hint{margin:0;color:var(--muted);font-size:14px}
+.btns{display:flex;flex-wrap:wrap;gap:10px}
+button{font:inherit;font-weight:800;border-radius:999px;padding:11px 20px;cursor:pointer;border:2px solid var(--chalk);background:var(--chalk);color:#141a4a}
+button.ghost{background:transparent;color:var(--chalk)}
+button:disabled{opacity:.45;cursor:not-allowed}
+button:focus-visible{outline:3px solid var(--pink);outline-offset:2px}
+.traits{margin:0;display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:16px}
+.traits dt,.traits dd{margin:0;padding:7px 0;border-top:1px solid var(--line)}
+.traits dt{color:var(--muted);font-size:14px}
+.traits dd{font-weight:700;min-width:0}
+.sw{display:inline-block;width:14px;height:14px;border-radius:4px;vertical-align:-2px;margin-right:6px;border:1px solid var(--line)}
+.flags{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.flags li{padding:9px 12px;border-radius:10px;font-size:14px;border-left:4px solid var(--warn);background:rgba(255,179,64,.08)}
+.flags li.bad{border-color:var(--bad);background:rgba(255,107,107,.08)}
+.flags li.ok{border-color:var(--ok);background:rgba(95,224,138,.08)}
+.stage{position:relative;border-radius:18px;overflow:hidden;border:2px solid var(--line);background:var(--panel);aspect-ratio:1/1}
+.stage canvas,.stage img{position:absolute;inset:0;width:100%;height:100%;display:block}
+.stamp{position:absolute;left:12px;bottom:12px;font-family:var(--f-mono);font-size:12px;padding:4px 9px;border-radius:999px;background:rgba(10,20,86,.85);color:var(--muted)}
+.stamp.standin{color:var(--warn)}
+.empty{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:24px;font-family:var(--f-hand);font-size:26px;color:var(--muted)}
+footer{max-width:1040px;margin:0 auto;padding:0 16px 40px;color:var(--muted);font-size:14px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<header class="band">
+  <div class="band-inner">
+    <div class="head">
+      <div class="well" title="Fuzzboi Friend (pet well)">
+        <canvas id="pet" width="168" height="168" aria-label="Fuzzboi Friend, the pet"></canvas>
+        <span class="mood" id="mood">sleep</span>
+      </div>
+      <div>
+        <h1>Fuzzboi Friend</h1>
+        <p class="bubble" id="bubble" role="status">Hi! Tell me your hex code and I’ll make your Fuzzboi.</p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="card" aria-labelledby="codeLabel">
+    <label class="big" id="codeLabel" for="code">Your hex code</label>
+    <div class="code">
+      <span aria-hidden="true">#</span>
+      <input id="code" maxlength="7" autocomplete="off" autocapitalize="characters" spellcheck="false" inputmode="text" placeholder="C0FFEE" aria-describedby="hint">
+      <i class="chip" id="chip" aria-hidden="true"></i>
+    </div>
+    <p class="hint" id="hint">Six characters, 0–9 and A–F. Paste it with or without the #.</p>
+    <div class="btns">
+      <button id="save" type="button" disabled>Save my Fuzzboi</button>
+      <button id="share" type="button" class="ghost" disabled>Copy link</button>
+      <button id="roll" type="button" class="ghost">Surprise me</button>
+    </div>
+    <dl class="traits" id="traits"></dl>
+    <ul class="flags" id="flags"></ul>
+  </section>
+
+  <section class="stage" aria-label="Your Fuzzboi">
+    <canvas id="cv" width="2048" height="2048"></canvas>
+    <img id="cvimg" alt="" hidden>
+    <div class="empty" id="empty">Your Fuzzboi will appear here.</div>
+    <span class="stamp" id="stamp" hidden></span>
+  </section>
+</main>
+
+<footer>
+  <p>Fuzzbois are drawn by Astra. Every code picks a body, a color, up to three accessories and sometimes a rarity, and the code itself is the background. For the full breakdown, open the <a href="https://findastra.github.io/fuzzbois/">Fuzzboi Forge</a>. Fuzzboi Friend is a pet app by Astra (<a href="https://github.com/findastra/fuzzboi-friend">source</a>).</p>
+</footer>
+
+<script>
+// Where the rules and the 32 layers live. One copy: the Fuzzboi Forge on GitHub Pages.
+// When served locally next to a fuzzbois checkout, use that instead (for testing changes).
+const LOCAL = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname);
+const FORGE = LOCAL ? "../fuzzbois/site/" : "https://findastra.github.io/fuzzbois/site/";
+const CORS = new URL(FORGE, location.href).origin !== location.origin;
+
+const $ = id => document.getElementById(id);
+const codeEl=$("code"), cv=$("cv"), cvimg=$("cvimg"), stamp=$("stamp"), empty=$("empty");
+const layers = new Map();
+let F = null, layersReady = false, current = null;
+
+// ---------- the pet ----------
+// Mood meanings follow the Cage's PET-FILES.md. The art is not drawn yet (one paid image,
+// waiting on Astra's OK), so the pet well shows a Fuzzboi built from the layers as a stand-in.
+const SAYS = {
+  sleep:  "Hi! Tell me your hex code and I’ll make your Fuzzboi.",
+  curious:"Fluffing you up…",
+  happy:  "There you are! Save it before you lose it.",
+  worried:"Made it, but this code breaks a Fuzzboi rule. See the notes.",
+  sick:   "I can’t reach the Fuzzbois website for the drawings. Check your internet, then reload.",
+  sad:    "Something went wrong on my side. Reload and try again?",
+};
+function mood(m, text){ $("mood").textContent = m; $("bubble").textContent = text || SAYS[m]; }
+
+function drawPet(){
+  const c = $("pet"), x = c.getContext("2d");
+  x.clearRect(0,0,c.width,c.height);
+  if (!layersReady) return;
+  // Fuzzboi Friend's stand-in look: a pink cloud with a flower (code 725001).
+  const p = F.decode("725001").parts, tmp = document.createElement("canvas");
+  F.drawLayers(tmp, p, layers);
+  x.drawImage(tmp, 0, 0, c.width, c.height);
+}
+
+// ---------- the code ----------
+function clean(v){ return String(v||"").replace(/[^0-9a-f]/gi,"").toUpperCase().slice(0,6); }
+
+function show(){
+  const code = clean(codeEl.value);
+  if (codeEl.value !== code) codeEl.value = code;
+  $("chip").style.background = code.length===6 ? "#"+code : "var(--ground)";
+  const T=$("traits"), L=$("flags"); T.replaceChildren(); L.replaceChildren();
+  $("save").disabled = $("share").disabled = true;
+  codeEl.classList.remove("err");
+  if (code.length < 6){
+    current = null; cvimg.hidden = true; cv.hidden = true; empty.hidden = false; stamp.hidden = true;
+    mood("sleep", code.length ? `${6-code.length} more to go…` : SAYS.sleep);
+    return;
+  }
+  if (!F){ mood("sick"); return; }
+  const res = F.decode(code); current = res;
+  try{ history.replaceState(null,"","#"+code); }catch(e){}
+  for (const [k,v,color] of F.describe(res.parts)){
+    const dt=document.createElement("dt"); dt.textContent=k;
+    const dd=document.createElement("dd");
+    if (color){ const s=document.createElement("i"); s.className="sw"; s.style.background=color; dd.append(s); }
+    dd.append(v); T.append(dt,dd);
+  }
+  for (const [lvl,msg] of res.flags){
+    const li=document.createElement("li"); li.className = lvl==="ok"?"ok":lvl==="bad"?"bad":""; li.textContent=msg; L.append(li);
+  }
+  empty.hidden = true; cv.hidden = false; stamp.hidden = false;
+  const miss = F.missing(res.parts, layers);
+  if (!miss.length){
+    F.drawLayers(cv, res.parts, layers);
+    stamp.textContent = `#${code} · ${cv.width}×${cv.height}px`; stamp.className = "stamp";
+    $("save").disabled = $("share").disabled = false;
+    if (res.flags.some(f=>f[0]==="bad")) mood("worried");
+    else if (res.parts.rares.length) mood("happy", `Ooh, a rare one: ${res.parts.rares.map(r=>F.RARE[r].toLowerCase()).join(" and ")}! Save it.`);
+    else mood("happy");
+  } else {
+    F.drawStandIn(cv, res.parts);
+    stamp.textContent = "Rough sketch · the drawings haven’t loaded"; stamp.className = "stamp standin";
+    $("share").disabled = false;
+    mood(layersReady ? "sad" : "curious", layersReady ? "Some drawings are missing on the Fuzzbois website. That’s on us, not you." : SAYS.curious);
+  }
+  // an <img> copy so phones can long-press to save
+  try{ cv.toBlob(b=>{ if(!b) return; if (cvimg.src) URL.revokeObjectURL(cvimg.src); cvimg.src=URL.createObjectURL(b); cvimg.alt=`Fuzzboi #${code}. Long-press or right-click to save.`; cvimg.hidden=false; },"image/png"); }catch(e){}
+}
+
+codeEl.addEventListener("input", show);
+codeEl.addEventListener("paste", e=>{ e.preventDefault(); codeEl.value = clean(e.clipboardData.getData("text")); show(); });
+
+$("save").addEventListener("click", async ()=>{
+  if (!current) return;
+  try{ await F.savePng(cv, `fuzzboi-${current.code}.png`); mood("happy","Saved! Check your downloads."); }
+  catch(e){ mood("sad","I couldn’t save it here. Long-press or right-click the picture to save it."); }
+});
+$("share").addEventListener("click", async ()=>{
+  if (!current) return;
+  const url = location.href.split("#")[0] + "#" + current.code;
+  try{ await navigator.clipboard.writeText(url); mood("happy","Link copied. Anyone who opens it sees this Fuzzboi."); }
+  catch(e){ mood("happy", `Here’s your link: ${url}`); }
+});
+$("roll").addEventListener("click", ()=>{
+  const hex = Math.floor(Math.random()*0x1000000).toString(16).toUpperCase().padStart(6,"0");
+  codeEl.value = hex; show();
+});
+
+// ---------- start ----------
+function loadScript(src){ return new Promise((res,rej)=>{ const s=document.createElement("script"); s.src=src; s.onload=res; s.onerror=rej; document.head.append(s); }); }
+async function boot(){
+  const h = clean(location.hash);
+  if (h.length===6) codeEl.value = h;
+  try{ await loadScript(FORGE+"fuzzboi.js"); F = window.Fuzzboi; }
+  catch(e){ mood("sick"); return; }
+  if (codeEl.value) show();
+  let n = 0;
+  try{ n = await F.loadLayers(FORGE+"layers/", layers, CORS); }catch(e){}
+  if (!n){ mood("sick"); return; }
+  layersReady = true; drawPet(); show();
+  if (!codeEl.value) codeEl.focus();
+}
+window.addEventListener("hashchange", ()=>{ const h=clean(location.hash); if (h.length===6 && h!==clean(codeEl.value)){ codeEl.value=h; show(); } });
+boot().catch(()=>mood("sad"));
+</script>
