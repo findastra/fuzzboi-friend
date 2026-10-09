@@ -28,7 +28,8 @@ What is not done, plainly:
 
 - **Letters A–F use a temporary rule.** No trait uses letters yet, so A–F count as 0–5 (A=0 … F=5). The background is still your exact color. When Astra decides what letters mean, your Fuzzboi may change. The rule lives in `fuzzbois/site/fuzzboi.js`, so both pages change together.
 - **Two other rules are undecided** (how a rarity is picked, and taco vs. cheese numbering). See the Fuzzbois README.
-- **No pet art yet.** The pet well shows a Fuzzboi built from the layers as a stand-in, and the mood name is written under it. The real mood sheet is one paid image, so the Cage makes it only after Astra's OK ([card 006](https://github.com/findastra/astras-pet-apps/blob/main/handoffs/006-farmer-register-fuzzboi-friend.md)).
+- **No pet art yet.** The pet well shows a Fuzzboi built from the layers as a stand-in, and the mood name is written under it. Astra OK'd the mood sheet on 2026-10-09, but generating it failed because the OpenAI account had no credits left. The prompt, a reference made from her own layers and the Cage registration are ready in [cage/](cage/README.md) ([Cage card 006](https://github.com/findastra/astras-pet-apps/blob/main/handoffs/006-farmer-register-fuzzboi-friend.md)).
+- **Not in the Cage yet.** The registration is a patch in `cage/`, kept out of `astras-pet-apps` for now at Astra's request.
 - No desktop pet and no quick chat.
 - It needs the internet: the rules and the drawings come from the Fuzzbois website.
 - Nothing is saved. Your code is only in the address bar.
