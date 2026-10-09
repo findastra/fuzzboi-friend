@@ -31,7 +31,7 @@ h1{font-family:var(--f-display);font-weight:400;font-size:clamp(38px,8vw,64px);l
 .band p{font-family:var(--f-hand);font-size:21px;margin:4px 0 0;max-width:36ch}
 /* the pet well: square, the pet's home inside its app */
 .well{flex:none;width:96px;height:96px;border-radius:18px;border:3px solid var(--lime-ink);background:var(--panel);display:grid;place-items:center;position:relative;overflow:visible}
-.well canvas{width:84px;height:84px;border-radius:12px;image-rendering:auto}
+.well img{width:84px;height:84px;image-rendering:pixelated}
 .well .mood{position:absolute;bottom:-11px;left:50%;transform:translateX(-50%);font-family:var(--f-mono);font-size:11px;background:var(--lime-ink);color:var(--lime);padding:1px 8px;border-radius:999px;white-space:nowrap}
 .bubble{position:relative;background:#fff;color:#141a4a;font-family:var(--f-hand);font-weight:700;font-size:20px;line-height:1.15;padding:8px 14px;border-radius:16px;border:3px solid var(--lime-ink);max-width:28ch}
 .bubble::before{content:"";position:absolute;left:-11px;top:50%;margin-top:-8px;border:8px solid transparent;border-right-color:var(--lime-ink);border-left:0}
@@ -74,7 +74,7 @@ footer{max-width:1040px;margin:0 auto;padding:0 16px 40px;color:var(--muted);fon
   <div class="band-inner">
     <div class="head">
       <div class="well" title="Fuzzboi Friend (pet well)">
-        <canvas id="pet" width="168" height="168" aria-label="Fuzzboi Friend, the pet"></canvas>
+        <img id="pet" src="art/sleep-20261009.png" width="84" height="84" alt="Fuzzboi Friend, the pet">
         <span class="mood" id="mood">sleep</span>
       </div>
       <div>
@@ -128,8 +128,15 @@ const layers = new Map();
 let F = null, layersReady = false, current = null;
 
 // ---------- the pet ----------
-// Mood meanings follow the Cage's PET-FILES.md. The art is not drawn yet (one paid image,
-// waiting on Astra's OK), so the pet well shows a Fuzzboi built from the layers as a stand-in.
+// Mood meanings follow the Cage's PET-FILES.md. The nine mood frames (draft art, 2026-10-09) sit
+// in art/ in this repo; inside the Cage this page is in apps/, so it falls back to the Cage's frames.
+const FRAME_DIRS = ["art/", "../art/frames/fuzzboi-friend/"];
+let frameDir = 0;
+function showFrame(m){
+  const img = $("pet");
+  img.onerror = () => { if (++frameDir < FRAME_DIRS.length) img.src = FRAME_DIRS[frameDir] + m + "-20261009.png"; };
+  img.src = FRAME_DIRS[frameDir] + m + "-20261009.png";
+}
 const SAYS = {
   sleep:  "Hi! Tell me your hex code and I’ll make your Fuzzboi.",
   curious:"Fluffing you up…",
@@ -138,17 +145,7 @@ const SAYS = {
   sick:   "I can’t reach the Fuzzbois website for the drawings. Check your internet, then reload.",
   sad:    "Something went wrong on my side. Reload and try again?",
 };
-function mood(m, text){ $("mood").textContent = m; $("bubble").textContent = text || SAYS[m]; }
-
-function drawPet(){
-  const c = $("pet"), x = c.getContext("2d");
-  x.clearRect(0,0,c.width,c.height);
-  if (!layersReady) return;
-  // Fuzzboi Friend's stand-in look: a pink cloud with a flower (code 725001).
-  const p = F.decode("725001").parts, tmp = document.createElement("canvas");
-  F.drawLayers(tmp, p, layers);
-  x.drawImage(tmp, 0, 0, c.width, c.height);
-}
+function mood(m, text){ $("mood").textContent = m; $("bubble").textContent = text || SAYS[m]; showFrame(m); }
 
 // ---------- the code ----------
 function clean(v){ return String(v||"").replace(/[^0-9a-f]/gi,"").toUpperCase().slice(0,6); }
@@ -226,7 +223,7 @@ async function boot(){
   let n = 0;
   try{ n = await F.loadLayers(FORGE+"layers/", layers, CORS); }catch(e){}
   if (!n){ mood("sick"); return; }
-  layersReady = true; drawPet(); show();
+  layersReady = true; show();
   if (!codeEl.value) codeEl.focus();
 }
 window.addEventListener("hashchange", ()=>{ const h=clean(location.hash); if (h.length===6 && h!==clean(codeEl.value)){ codeEl.value=h; show(); } });

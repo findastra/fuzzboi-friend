@@ -7,16 +7,16 @@ What it adds there:
 - `pets.json`: the Fuzzboi Friend entry (kind `fuzzboi`, `says` lines, live link), a new `fuzzboi` kind in `cage_life` (ground, hops like the Forge's parade), and an up-to-date Fuzzbois candidate line.
 - `scripts/generate-pets.mjs`: the Fuzzboi Friend prompt, generated **from a reference** so the pet keeps Astra's design.
 - `art/refs/fuzzboi-friend-ref-20261009.png`: that reference, composited only from Astra's own Fuzzboi layers (code `043001`: fuzzy black outline, ice-blue body, birthday hat) on plain grey. A copy is in this repo's `art/`.
-- `apps/fuzzboi-friend-20261009.html`: a copy of this app.
+- `apps/fuzzboi-friend-20261009.html`: a copy of this app (its pet well falls back to the Cage's frames).
+- **The generated art:** `art/sheets/fuzzboi-friend-20261009.png` (the paid mood sheet, generated 2026-10-09 after Astra added credits) and the nine 256×256 frames in `art/frames/fuzzboi-friend/`, plus the rebuilt `ROSTER.md`, README table, `cage-data.js`, `art/frames/index.json` and `art/roster.png`. Draft until Astra approves it.
 
-**Not done:** the mood sheet. Generating it failed on 2026-10-09 because the OpenAI account had no credits left ("You have no credits remaining", error 429). Nothing was billed.
+With it applied, `npm run check` says "Cage OK: 19 pet apps" and all 48 tests pass (checked 2026-10-09 against `main` at `52637db`).
 
-To finish, in an `astras-pet-apps` checkout on a branch:
+To finish, in an `astras-pet-apps` checkout on a branch. **Don't run the generator again**: the sheet is in the patch, and a re-run would only cost money.
 
 ```
 git apply path/to/cage-registration-20261009.patch
-node scripts/generate-pets.mjs fuzzboi-friend
 npm run build && npm run check && npm test
 ```
 
-Then look at the roster sheet, copy the nine frames into this repo's `art/`, list them in `sprite-20261009.json`, and set Cage card 006 to done.
+Then set Cage card 006 to done. If `main` has moved and the patch doesn't apply, apply it to `52637db` and merge, or re-run `npm run build` after resolving `pets.json`: the generated files are rebuilt from it.
