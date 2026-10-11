@@ -33,3 +33,5 @@ Friendly Farmer in `findastra/astras-pet-apps`; the pet's registry entry and art
 When Astra's request is unclear or sounds like an assignment, check `handoffs/` here and in
 `findastra/astras-pet-apps` first. Leave a card when work remains. Format: the Cage's
 [skills/handoff/SKILL.md](https://github.com/findastra/astras-pet-apps/blob/main/skills/handoff/SKILL.md).
+
+Desktop appearance revision by OpenAI Codex (GPT-6), 2026-10-11. See desktop-pet-20261011.json; runtime behavior is in astras-pet-apps.

@@ -40,3 +40,5 @@ Each part of a pet app has one name: the **pet** (Fuzzboi Friend), its **app** (
 ## Credits
 
 Fuzzbois are drawn by Astra. Hatched with Claude Opus 5.5 (`claude-opus-5-5`) on 2026-10-09. MIT licensed.
+
+Desktop appearance draft updated 2026-10-11: see [desktop details](desktop-pet-20261011.json). This changes the desktop pet, not application features.

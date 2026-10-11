@@ -7,6 +7,11 @@
   "runs_on": "A modern browser, online: https://findastra.github.io/fuzzboi-friend/",
   "entry": "fuzzboi-friend-20261009.html",
   "status": "hatching",
-  "cage": { "topic": "pet-app", "home": "README.md" },
-  "built_with": "Claude Opus 5.5 (claude-opus-5-5), 2026-10-09"
+  "cage": {
+    "topic": "pet-app",
+    "home": "README.md"
+  },
+  "built_with": "Claude Opus 5.5 (claude-opus-5-5), 2026-10-09",
+  "desktop_pet": "desktop-pet-20261011.json",
+  "desktop_art_built_with": "OpenAI Codex (GPT-6), built-in imagegen and native renderer, 2026-10-11"
 }
