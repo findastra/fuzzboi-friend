@@ -14,9 +14,9 @@ Friendly Farmer in `findastra/astras-pet-apps`; the pet's registry entry and art
 
 ## Rules
 - **One copy of the Fuzzboi rules.** The trait tables, decoding and drawing are in
-  `findastra/fuzzbois` `site/fuzzboi.js`, served at `https://findastra.github.io/fuzzbois/site/`.
+  `findastra/fuzzboi-factory` `site/fuzzboi.js`, served at `https://findastra.github.io/fuzzboi-factory/site/`.
   This app loads that file and the layers from there. Never copy the rules into this repo; change
-  them in `fuzzbois` so the Forge and this app agree.
+  them in `fuzzboi-factory` so the Forge and this app agree.
 - **Fuzzbois are Astra's own drawings.** Don't add other art, and don't redraw or "improve" the
   layers here.
 - **The letter rule is temporary** (A–F count as 0–5, set 2026-10-09). Say so wherever a code
