@@ -10,7 +10,7 @@ version here when you change something substantial.
 A pet app for sharing Fuzzbois: a friend types their six-digit hex code and gets that exact
 Fuzzboi as a PNG. v0 is one web app file (`fuzzboi-friend-20261009.html`), live on GitHub Pages
 at <https://findastra.github.io/fuzzboi-friend/> (`index.html` forwards there). Its host is the
-Friendly Farmer in `findastra/astras-pet-apps`; the pet's registry entry and art live there.
+Friendly Farmer in `findastra/astras-pet-os`; the pet's registry entry and art live there.
 
 ## Rules
 - **One copy of the Fuzzboi rules.** The trait tables, decoding and drawing are in
@@ -21,8 +21,8 @@ Friendly Farmer in `findastra/astras-pet-apps`; the pet's registry entry and art
   layers here.
 - **The letter rule is temporary** (A–F count as 0–5, set 2026-10-09). Say so wherever a code
   with letters is shown, until Astra decides what letters mean.
-- Follow the Cage's [PET-FILES.md](https://github.com/findastra/astras-pet-apps/blob/main/PET-FILES.md)
-  and use its [PET-WORDS.md](https://github.com/findastra/astras-pet-apps/blob/main/PET-WORDS.md):
+- Follow the Cage's [PET-FILES.md](https://github.com/findastra/astras-pet-os/blob/main/PET-FILES.md)
+  and use its [PET-WORDS.md](https://github.com/findastra/astras-pet-os/blob/main/PET-WORDS.md):
   pet, app, desktop pet, bubble, quick chat, app icon, pet well.
 - Text goes into the page with `textContent`, never `innerHTML`.
 - The repo description starts with the website link, and the repo's Website field is set to it.
@@ -31,7 +31,7 @@ Friendly Farmer in `findastra/astras-pet-apps`; the pet's registry entry and art
 
 ## Handoffs
 When Astra's request is unclear or sounds like an assignment, check `handoffs/` here and in
-`findastra/astras-pet-apps` first. Leave a card when work remains. Format: the Cage's
-[skills/handoff/SKILL.md](https://github.com/findastra/astras-pet-apps/blob/main/skills/handoff/SKILL.md).
+`findastra/astras-pet-os` first. Leave a card when work remains. Format: the Cage's
+[skills/handoff/SKILL.md](https://github.com/findastra/astras-pet-os/blob/main/skills/handoff/SKILL.md).
 
-Desktop appearance revision by OpenAI Codex (GPT-6), 2026-10-11. See desktop-pet-20261011.json; runtime behavior is in astras-pet-apps.
+Desktop appearance revision by OpenAI Codex (GPT-6), 2026-10-11. See desktop-pet-20261011.json; runtime behavior is in astras-pet-os.
