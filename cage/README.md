@@ -12,7 +12,7 @@ What it adds there:
 
 With it applied, `npm run check` says "Cage OK: 19 pet apps" and all 48 tests pass (checked 2026-10-09 against `main` at `52637db`).
 
-To finish, in an `astras-pet-apps` checkout on a branch. **Don't run the generator again**: the sheet is in the patch, and a re-run would only cost money.
+To finish, in an `astras-pet-os` checkout on a branch. **Don't run the generator again**: the sheet is in the patch, and a re-run would only cost money.
 
 ```
 git apply path/to/cage-registration-20261009.patch

@@ -2,7 +2,7 @@
   "pet": "Fuzzboi Friend",
   "art": "fuzzboi-friend",
   "status": "draft",
-  "note": "DRAFT art until Astra approves it. Generated 2026-10-09 by the Cage (astras-pet-apps scripts/generate-pets.mjs) from a reference composited from Astra's own Fuzzboi layers (code 043001), then sliced into 256x256 frames with the shared mood stickers.",
+  "note": "DRAFT art until Astra approves it. Generated 2026-10-09 by the Cage (astras-pet-os scripts/generate-pets.mjs) from a reference composited from Astra's own Fuzzboi layers (code 043001), then sliced into 256x256 frames with the shared mood stickers.",
   "moods": [
     "idle",
     "blink",

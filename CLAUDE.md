@@ -7,5 +7,5 @@ For Claude:
   `fuzzbois` checkout and check: a code with letters, a two-hat code (e.g. `A1361F`), Save,
   Copy link, and phone width (no sideways scroll).
 - Rule changes belong in `findastra/fuzzbois` `site/fuzzboi.js`, not here.
-- Unclear request or an assignment: check `handoffs/` here and in `findastra/astras-pet-apps`.
+- Unclear request or an assignment: check `handoffs/` here and in `findastra/astras-pet-os`.
 - Do not push to `main` or create GitHub repos without Astra's OK.
